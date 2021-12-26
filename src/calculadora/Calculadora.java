@@ -1,7 +1,10 @@
 package calculadora;
 
+import java.awt.Color;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class Calculadora extends javax.swing.JFrame {
 
@@ -22,6 +25,7 @@ public class Calculadora extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         txtOperacion = new javax.swing.JLabel();
         txtResultado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -53,6 +57,13 @@ public class Calculadora extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(244, 253, 251));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 60, 20));
 
         txtOperacion.setBackground(new java.awt.Color(35, 36, 38));
         txtOperacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -442,40 +453,40 @@ public class Calculadora extends javax.swing.JFrame {
             String resultado = se.eval(txtOperacion.getText()).toString();
             txtResultado.setText(resultado);
         } catch (Exception e) {
-           // btn_c.doClick();
+            // btn_c.doClick();
         }
     }//GEN-LAST:event_btn_igualActionPerformed
 
     private void btn_borrUltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrUltActionPerformed
-        String texto = txtOperacion.getText().substring(0,txtOperacion.getText().length()-1);
+        String texto = txtOperacion.getText().substring(0, txtOperacion.getText().length() - 1);
         txtOperacion.setText(texto);
         btn_igual.doClick();
-       
+
     }//GEN-LAST:event_btn_borrUltActionPerformed
 
     private void btn_porActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_porActionPerformed
         addNumero("%");
-       
+
     }//GEN-LAST:event_btn_porActionPerformed
 
     private void bnt_divActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_divActionPerformed
         addNumero("/");
-        
+
     }//GEN-LAST:event_bnt_divActionPerformed
 
     private void btn_mulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mulActionPerformed
         addNumero("*");
-        
+
     }//GEN-LAST:event_btn_mulActionPerformed
 
     private void btn_resActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resActionPerformed
         addNumero("-");
-        
+
     }//GEN-LAST:event_btn_resActionPerformed
 
     private void btn_sumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sumActionPerformed
         addNumero("+");
-       
+
     }//GEN-LAST:event_btn_sumActionPerformed
 
     private void btn_cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cActionPerformed
@@ -536,8 +547,66 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void btn_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_9ActionPerformed
         addNumero("9");
-         btn_igual.doClick();
+        btn_igual.doClick();
     }//GEN-LAST:event_btn_9ActionPerformed
+
+    boolean modoOscuro = false;
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (!modoOscuro) {
+
+            jPanel1.setBackground(Color.decode("#101C40"));
+            jPanel2.setBackground(Color.decode("#4F5873"));
+            txtOperacion.setForeground(Color.decode("#ccf0e5"));
+            txtResultado.setForeground(Color.decode("#ccf0e5"));
+
+            cambiarColorBtn1(btn_mul);
+            cambiarColorBtn1(btn_c);
+            cambiarColorBtn1(btn_por);
+            cambiarColorBtn1(btn_sum);
+            cambiarColorBtn1(btn_res);
+            cambiarColorBtn1(btn_borrUlt);
+            cambiarColorBtn1(bnt_div);
+
+            cambiarColorBtn2(btn_1);
+            cambiarColorBtn2(btn_2);
+            cambiarColorBtn2(btn_3);
+            cambiarColorBtn2(btn_4);
+            cambiarColorBtn2(btn_5);
+            cambiarColorBtn2(btn_6);
+            cambiarColorBtn2(btn_7);
+            cambiarColorBtn2(btn_8);
+            cambiarColorBtn2(btn_9);
+            cambiarColorBtn2(btn_0);
+            cambiarColorBtn2(btn_punto);
+
+            btn_igual.setIcon(new ImageIcon(getClass().getResource("/Imagenes/btn3_dark.png")));
+            btn_igual.setPressedIcon(new ImageIcon(getClass().getResource("/imagenes/btn3_dark.png")));
+            btn_igual.setRolloverIcon(new ImageIcon(getClass().getResource("/imagenes/btn3_dark_arriba.png")));
+            btn_igual.setForeground(Color.decode("#dfe0e4"));
+            modoOscuro=true;
+        } else {
+            Calculadora frame = new Calculadora();
+            this.dispose();
+            frame.setVisible(modoOscuro);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void cambiarColorBtn1(JButton btn) {
+        btn.setIcon(new ImageIcon(getClass().getResource("/Imagenes/btn1_dark.png")));
+        btn.setPressedIcon(new ImageIcon(getClass().getResource("/imagenes/btn1_dark.png")));
+        btn.setRolloverIcon(new ImageIcon(getClass().getResource("/imagenes/btn1_presset_dark.png")));
+        btn.setForeground(Color.decode("#18d4a3"));
+
+    }
+
+    public void cambiarColorBtn2(JButton btn) {
+        btn.setIcon(new ImageIcon(getClass().getResource("/Imagenes/btn2_dark.png")));
+        btn.setPressedIcon(new ImageIcon(getClass().getResource("/imagenes/btn2_dark.png")));
+        btn.setRolloverIcon(new ImageIcon(getClass().getResource("/imagenes/btn1_presset_dark.png")));
+        btn.setForeground(Color.decode("#dfe0e4"));
+    }
 
     /**
      * @param args the command line arguments
@@ -553,16 +622,24 @@ public class Calculadora extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Calculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculadora.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Calculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculadora.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Calculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculadora.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Calculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculadora.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -594,6 +671,7 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JButton btn_punto;
     private javax.swing.JButton btn_res;
     private javax.swing.JButton btn_sum;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel txtOperacion;
